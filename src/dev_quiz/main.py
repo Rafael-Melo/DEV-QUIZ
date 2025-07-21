@@ -32,7 +32,15 @@ def main(page: ft.Page):
     options_container = ft.Column(spacing=10)
     next_button = ft.ElevatedButton("Próxima", visible=False)
 
-    options_container = ft.Column(spacing=10)
+    header = ft.Row(
+        controls=[
+            ft.Icon(name=ft.Icons.PSYCHOLOGY, color=ft.Colors.GREEN_600, size=40),
+            ft.Text("Dev Quiz", size=32, weight="bold", color=ft.Colors.GREEN_700),
+        ],
+        alignment=ft.MainAxisAlignment.CENTER,
+        spacing=10,
+    )
+
 
     def show_question():
         question = questions[page.current_question]
@@ -91,7 +99,15 @@ def main(page: ft.Page):
 
     next_button.on_click = next_question
 
-    page.add(question_text, ft.Divider(), options_container, next_button)
+    page.add(
+        header,
+        ft.Divider(thickness=2),
+        question_text,
+        ft.Divider(),
+        options_container,
+        next_button,
+    )
+
     show_question()
 
 ft.app(target=main)
