@@ -26,8 +26,32 @@ def main(page: ft.Page):
     page.title = "Dev Quiz"
     page.padding = 20
     page.bgcolor = ft.Colors.GREY_50
+    page.window.width = 540
+    page.window.height = 720
     page.current_question = 0
     page.score = 0
+
+    dark_mode = ft.Ref[bool]()
+
+    def toggle_theme(e):
+        dark_mode.current = not dark_mode.current
+        apply_theme()
+
+    def apply_theme():
+        if dark_mode.current:
+            page.bgcolor = ft.Colors.BLACK
+            header.bgcolor = ft.Colors.GREY_900
+            for c in header.content.controls:
+                if isinstance(c, ft.Text):
+                    c.color = ft.Colors.GREEN_100
+        else:
+            page.bgcolor = ft.Colors.GREY_50
+            header.bgcolor = ft.Colors.GREEN_50
+            for c in header.content.controls:
+                if isinstance(c, ft.Text):
+                    c.color = ft.Colors.GREEN_700
+        show_question()
+        page.update()
 
     animated_question = ft.AnimatedSwitcher(
         content=ft.Text(""),
@@ -59,6 +83,8 @@ def main(page: ft.Page):
         border_radius=10
     )
 
+    theme_switch = ft.Switch(label="Modo escuro", on_change=toggle_theme)
+
     def show_question():
         question = questions[page.current_question]
 
@@ -66,6 +92,7 @@ def main(page: ft.Page):
             question["question"],
             size=24,
             weight="bold",
+            color=ft.Colors.PRIMARY,
             key=str(page.current_question),
         )
 
@@ -148,6 +175,7 @@ def main(page: ft.Page):
 
     page.add(
         header,
+        theme_switch,
         ft.Divider(thickness=2),
         animated_question,
         ft.Divider(),
