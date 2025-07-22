@@ -1,0 +1,21 @@
+[
+  {
+    "question": "What does HTML stand for?",
+    "options": [
+      "Hyperlinks and Text Markup Language",
+      "Home Tool Markup Language",
+      "HyperText Markup Language"
+    ],
+    "answer": 2
+  },
+  {
+    "question": "Which Python keyword is used to define a function?",
+    "options": ["def", "function", "define"],
+    "answer": 0
+  },
+  {
+    "question": "Which one is a frontend framework?",
+    "options": ["Django", "Flask", "React"],
+    "answer": 2
+  }
+]
